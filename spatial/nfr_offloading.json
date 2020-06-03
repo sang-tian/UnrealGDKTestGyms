@@ -1,0 +1,110 @@
+{
+	"template": "w4_r1000_e10",
+	"world": {
+	  "dimensions": {
+		"x_meters": 2000,
+		"z_meters": 2000
+	  },
+	  "chunkEdgeLengthMeters": 50,
+	  "legacy_flags":[
+		{
+		  "name": "shunt_worker_thread_count",
+		  "value": "1"
+		},
+		{
+		  "name": "bridge_qos_max_timeout",
+		  "value": "0"
+		},
+		{
+		  "name": "load_snapshot_at_startup",
+		  "value": "true"
+		},
+		{
+		  "name": "logsink_level",
+		  "value": "error"
+		},
+		{
+		  "name": "bridge_soft_handover_enabled",
+		  "value": "false"
+		},
+		{
+		  "name": "bridge_single_port_max_heartbeat_timeout_ms",
+		  "value": "3600000"
+		}
+	  ],
+	  "snapshots": {
+		"snapshotWritePeriodSeconds": 0
+	  }
+	},
+	"load_balancing": {
+	  "layer_configurations": [
+		{
+		  "layer": "UnrealWorker",
+		  "rectangle_grid": {
+			"cols": 1,
+			"rows": 1
+		  },
+        "options": {
+          "manual_worker_connection_only": true
+        }
+ 		},
+		{
+		  "layer": "NPCWorker",
+		  "rectangle_grid": {
+			"cols": 1,
+			"rows": 1
+		  },
+        "options": {
+          "manual_worker_connection_only": true
+        }
+		}
+	  ]
+	},
+	"workers": [
+	  {
+		"worker_type": "UnrealClient",
+		"permissions": [
+		  {
+			"all": {}
+		  }
+		]
+	  },
+	  {
+		"worker_type": "UnrealWorker",
+		"flags": [
+		  {
+			"name": "override_spawning",
+			"value": "true"
+		  },
+		  {
+			"name": "total_players",
+			"value": "100"
+		  },
+		  {
+			"name": "player_density",
+			"value": "3"
+		  },
+		  {
+			"name": "num_npcs",
+			"value": "100"
+		  }
+		],
+		"permissions": [
+		  {
+			"all": {}
+		  }
+		]
+	  },
+	  {
+		"worker_type": "NPCWorker",
+		"flags": [],
+		"permissions": [
+		  {
+			"all":
+			{
+			}
+		  }
+		]
+	  }
+	]
+}
